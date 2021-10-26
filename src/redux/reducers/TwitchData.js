@@ -18,20 +18,24 @@ function TwitchData (state = INITIAL_STATE, action){
 
 export default TwitchData;
 
-export const getStreamData = (test) => dispatch => {
+export const getStreamData = (oAuthKey) => dispatch => {
 
-    let test2 = test
-    /*fetch('https://id.twitch.tv/oauth2/token?client_id=bgbezb2vov7jc4twxauhw3yh30ubbx&client_secret=owwpzi87f0jex7m8j7d98y9awdao4z&grant_type=client_credentials',{
-        "method": "POST"
+    console.log('ici '+ oAuthKey)
+    fetch('https://api.twitch.tv/helix/search/categories?query=grant',{
+        "method": "GET",
+        "headers": {"Client-ID": 'bgbezb2vov7jc4twxauhw3yh30ubbx',
+                    "Authorization": "Bearer "+oAuthKey},
     })
     .then(response => response.json())
     .then(data => {
-        dispatch({
+        console.log(data)
+        
+        /*dispatch({
             type: 'LOADING',
             payload: data.access_token
-        })
-    })*/
+        })*/
+    })
 
-    console.log('ici = '+test)
+
     
 }

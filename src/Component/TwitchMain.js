@@ -23,12 +23,9 @@ export default function TwitchMain() {
 
     useEffect(() => {
         dispatch(getStreamData(oAuthKey.oAuthKey))
-    }, [oAuthKey])
+    }, [oAuthKey.oAuthKey])
 
-
-
-
-
+    
 
     return (
         <div>
