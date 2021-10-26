@@ -24,3 +24,4 @@ yarn-error.log*
 
 
 src/Reducers/Secret.js
+src/redux/reducers/TwitchKey.js
