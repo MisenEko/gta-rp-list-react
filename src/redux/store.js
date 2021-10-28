@@ -5,7 +5,7 @@ import thunk from 'redux-thunk'
 
 const rootReducer = combineReducers({
     TwitchKey,
-    TwitchData
+    TwitchData,
 })
 
 const store = createStore(rootReducer, applyMiddleware(thunk));

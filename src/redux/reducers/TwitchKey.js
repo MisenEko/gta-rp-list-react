@@ -1,5 +1,6 @@
 const INITIAL_STATE = {
-    oAuthKey : ''
+    oAuthKey : [],
+    refresh : false
 }
 
 function TwitchKey (state = INITIAL_STATE, action){
@@ -8,7 +9,8 @@ function TwitchKey (state = INITIAL_STATE, action){
         case 'LOADING' : {
             return {
                 ...state,
-                oAuthKey: action.payload
+                oAuthKey: action.payload, 
+                refresh: true
             }
         }
     }
@@ -26,9 +28,10 @@ export const getOauthKey = () => dispatch => {
     .then(data => {
         dispatch({
             type: 'LOADING',
-            payload: data.access_token
+            payload: data,
         })
     })
+
     
 }
 

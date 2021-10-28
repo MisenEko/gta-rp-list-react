@@ -1,11 +1,11 @@
 const INITIAL_STATE = {
-    streamData : ''
+    streamData : []
 }
 
 function TwitchData (state = INITIAL_STATE, action){
 
     switch(action.type){
-        case 'LOADING' : {
+        case 'TWITCHDATA' : {
             return {
                 ...state,
                 streamData: action.payload
@@ -20,20 +20,17 @@ export default TwitchData;
 
 export const getStreamData = (oAuthKey) => dispatch => {
 
-    console.log('ici '+ oAuthKey)
-    fetch('https://api.twitch.tv/helix/search/categories?query=grant',{
+    fetch('https://api.twitch.tv/helix/streams?game_id=32982&first=100&language=fr',{
         "method": "GET",
         "headers": {"Client-ID": 'bgbezb2vov7jc4twxauhw3yh30ubbx',
                     "Authorization": "Bearer "+oAuthKey},
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data)
-        
-        /*dispatch({
-            type: 'LOADING',
-            payload: data.access_token
-        })*/
+        dispatch({
+            type: 'TWITCHDATA',
+            payload: data
+        })
     })
 
 
