@@ -1,0 +1,12 @@
+.thumbnail{
+    max-width: 440px;
+    min-width: 440px;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+    min-height: 300px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

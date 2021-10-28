@@ -1,8 +1,10 @@
 import React, {useState, useEffect, useRef} from 'react'
+import './twitchmain.css'
 import TwitchThumbNail from './TwitchThumbNail'
 import { useSelector, useDispatch } from 'react-redux'
 import {getOauthKey} from '../redux/reducers/TwitchKey'
 import { getStreamData } from '../redux/reducers/TwitchData'
+import {v4 as uuidv4} from 'uuid'
 
 
 export default function TwitchMain() {
@@ -30,13 +32,23 @@ export default function TwitchMain() {
         
     }, [oAuthKey.access_token]) 
 
-    if(streamData.data){streamData.data.map( item => {
-        console.log(item)
-    })}
+    if(streamData.data){
+        console.log(streamData.data)
+    }
 
     return (
-        <div>
-            <TwitchThumbNail />
-        </div>
+        <>            
+                <div className="thumbnail-content">
+                    {streamData.data && streamData.data.map( item => {
+                    return (
+                        <TwitchThumbNail key ={uuidv4()}>                            
+                            <img  src={`https://static-cdn.jtvnw.net/previews-ttv/live_user_${item.user_login}-440x248.jpg`} />
+                            <div>{item.title}</div>
+                        </TwitchThumbNail>
+                    )
+                    })}
+                </div> 
+            
+        </>
     )
 }
