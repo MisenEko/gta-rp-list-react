@@ -1,4 +1,5 @@
-.thumbnail-content{
+.thumbnail{
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
 }

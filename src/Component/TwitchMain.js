@@ -59,22 +59,22 @@ export default function TwitchMain() {
                     })}
                 </div>*/}
 
-                <div className="thumbnail-content">
-                    {filteredData.length > 1 ? filteredData.map( item => {{console.log(item.user_login)}
-
-                                            <TwitchThumbNail key ={uuidv4()}>                            
-                                                <img  src={`https://static-cdn.jtvnw.net/previews-ttv/live_user_${item.user_login}-440x248.jpg`} />
-                                                <div>{item.title}</div>
-                                             </TwitchThumbNail>
-                    }) : streamData.map( item => {
+                <div className="thumbnail">
+                    {filteredData.length > 1 ? filteredData.map( item => {
+                        
+                        return ( <TwitchThumbNail key ={uuidv4()}>                            
+                                    <img  src={`https://static-cdn.jtvnw.net/previews-ttv/live_user_${item.user_login}-440x248.jpg`} />
+                                    <div>{item.title}</div>
+                                 </TwitchThumbNail>
+                                )}) : streamData.map( item => {
                         return (
-                            <TwitchThumbNail key ={uuidv4()}>                            
-                                <img  src={`https://static-cdn.jtvnw.net/previews-ttv/live_user_${item.user_login}-440x248.jpg`} />
-                                <div>{item.title}</div>
-                            </TwitchThumbNail>
-                        )
-                        }) } 
-                    </div>
+                                <TwitchThumbNail key ={uuidv4()}>                            
+                                    <img  src={`https://static-cdn.jtvnw.net/previews-ttv/live_user_${item.user_login}-440x248.jpg`} />
+                                    <div>{item.title}</div>
+                                </TwitchThumbNail>
+                                )}) 
+                    } 
+                </div>
 
 
 
