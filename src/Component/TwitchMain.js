@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react'
 import './twitchmain.css'
 import TwitchThumbNail from './TwitchThumbNail'
+import TwitchFilter from './TwitchFilter'
 import { useSelector, useDispatch } from 'react-redux'
 import {getOauthKey} from '../redux/reducers/TwitchKey'
 import { getStreamData } from '../redux/reducers/TwitchData'
@@ -15,7 +16,7 @@ export default function TwitchMain() {
         ...state.TwitchKey       
     }))
 
-    const {streamData} = useSelector(state => ({
+    const {streamData, filteredData} = useSelector(state => ({
         ...state.TwitchData
     }))
 
@@ -23,7 +24,12 @@ export default function TwitchMain() {
         dispatch(getOauthKey())      
     }, [])
 
+    console.log("en dessous fileteredata")
+    console.log(filteredData)
 
+
+    console.log("en dessous streamdata")
+    console.log(streamData)
 
     useEffect(() => {
         if(refresh){
@@ -32,14 +38,18 @@ export default function TwitchMain() {
         
     }, [oAuthKey.access_token]) 
 
-    if(streamData.data){
-        console.log(streamData.data)
-    }
 
     return (
         <>            
-                <div className="thumbnail-content">
-                    {streamData.data && streamData.data.map( item => {
+                <div className="filter-content">
+                    <TwitchFilter
+                        gtaData={streamData}
+                        twitchKey = {oAuthKey.access_token}
+                    />
+                </div>
+
+                {/*<div className="thumbnail-content">
+                    {streamData && streamData.map( item => {
                     return (
                         <TwitchThumbNail key ={uuidv4()}>                            
                             <img  src={`https://static-cdn.jtvnw.net/previews-ttv/live_user_${item.user_login}-440x248.jpg`} />
@@ -47,7 +57,27 @@ export default function TwitchMain() {
                         </TwitchThumbNail>
                     )
                     })}
-                </div> 
+                </div>*/}
+
+                <div className="thumbnail-content">
+                    {filteredData.length > 1 ? filteredData.map( item => {{console.log(item.user_login)}
+
+                                            <TwitchThumbNail key ={uuidv4()}>                            
+                                                <img  src={`https://static-cdn.jtvnw.net/previews-ttv/live_user_${item.user_login}-440x248.jpg`} />
+                                                <div>{item.title}</div>
+                                             </TwitchThumbNail>
+                    }) : streamData.map( item => {
+                        return (
+                            <TwitchThumbNail key ={uuidv4()}>                            
+                                <img  src={`https://static-cdn.jtvnw.net/previews-ttv/live_user_${item.user_login}-440x248.jpg`} />
+                                <div>{item.title}</div>
+                            </TwitchThumbNail>
+                        )
+                        }) } 
+                    </div>
+
+
+
             
         </>
     )

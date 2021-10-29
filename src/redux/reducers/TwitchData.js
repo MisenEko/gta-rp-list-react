@@ -1,5 +1,6 @@
 const INITIAL_STATE = {
-    streamData : []
+    streamData : [],
+    filteredData : []
 }
 
 function TwitchData (state = INITIAL_STATE, action){
@@ -9,6 +10,14 @@ function TwitchData (state = INITIAL_STATE, action){
             return {
                 ...state,
                 streamData: action.payload
+            }
+        }
+
+        case 'FILTEREDDATA' : {
+            const newArr = action.payload;           
+            return {
+                ...state,
+                filteredData: newArr
             }
         }
     }
@@ -27,9 +36,10 @@ export const getStreamData = (oAuthKey) => dispatch => {
     })
     .then(response => response.json())
     .then(data => {
+
         dispatch({
             type: 'TWITCHDATA',
-            payload: data
+            payload: data.data
         })
     })
 
