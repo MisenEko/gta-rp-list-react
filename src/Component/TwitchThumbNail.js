@@ -7,7 +7,7 @@ export default function TwitchShowStream(props) {
 
 
     return (
-        <div className="thumbnail-content">
+        <div className="thumbnail-content fade-in-image ">
             {props.children}
         </div>
     )

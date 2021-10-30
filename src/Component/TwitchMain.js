@@ -5,6 +5,7 @@ import TwitchFilter from './TwitchFilter'
 import { useSelector, useDispatch } from 'react-redux'
 import {getOauthKey} from '../redux/reducers/TwitchKey'
 import { getStreamData } from '../redux/reducers/TwitchData'
+import {getAllStreams} from '../redux/reducers/TwitchData'
 import {v4 as uuidv4} from 'uuid'
 
 
@@ -24,16 +25,17 @@ export default function TwitchMain() {
         dispatch(getOauthKey())      
     }, [])
 
-    console.log("en dessous fileteredata")
-    console.log(filteredData)
-
-
-    console.log("en dessous streamdata")
-    console.log(streamData)
-
     useEffect(() => {
         if(refresh){
             dispatch(getStreamData(oAuthKey.access_token))
+        }
+        
+    }, [oAuthKey.access_token])
+
+    useEffect(() => {
+
+        if(refresh){
+            dispatch(getAllStreams(oAuthKey.access_token))
         }
         
     }, [oAuthKey.access_token]) 
@@ -66,13 +68,16 @@ export default function TwitchMain() {
                                     <img  src={`https://static-cdn.jtvnw.net/previews-ttv/live_user_${item.user_login}-440x248.jpg`} />
                                     <div>{item.title}</div>
                                  </TwitchThumbNail>
-                                )}) : streamData.map( item => {
+                                )}) 
+
+                                             : streamData.map( item => {
+
                         return (
                                 <TwitchThumbNail key ={uuidv4()}>                            
                                     <img  src={`https://static-cdn.jtvnw.net/previews-ttv/live_user_${item.user_login}-440x248.jpg`} />
                                     <div>{item.title}</div>
                                 </TwitchThumbNail>
-                                )}) 
+                                )})
                     } 
                 </div>
 
