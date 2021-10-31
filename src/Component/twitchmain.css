@@ -1,5 +1,6 @@
 .thumbnail{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    max-width: 1460px;
+    /*justify-content: space-around;*/
 }

@@ -5,19 +5,28 @@ const INITIAL_STATE = {
 
 function TwitchData (state = INITIAL_STATE, action){
 
+    let isData = true
+
     switch(action.type){
         case 'TWITCHDATA' : {
+
             return {
                 ...state,
-                streamData: action.payload
+                streamData: action.payload,
+
             }
         }
 
         case 'FILTEREDDATA' : {
-            const newArr = action.payload;           
+            /** a little spaghetti code... */
+            let newArr = action.payload;
+            {newArr.length === 0 ? isData = false : isData = true}
+            if(newArr[0]==='del'){isData = true; newArr=[];}else{isData=false}
+
             return {
                 ...state,
-                filteredData: newArr
+                filteredData: newArr,
+                checkData: isData
             }
         }
     }
@@ -27,52 +36,6 @@ function TwitchData (state = INITIAL_STATE, action){
 
 export default TwitchData;
 
-export const getStreamData = (oAuthKey, counter = 3, cursor, data =[]) => dispatch => {
-
-   /*fetch('https://api.twitch.tv/helix/streams?game_id=32982&first=100&language=fr',{
-        "method": "GET",
-        "headers": {"Client-ID": 'bgbezb2vov7jc4twxauhw3yh30ubbx',
-                    "Authorization": "Bearer "+oAuthKey},
-    })
-    .then(response => response.json())
-    .then(data => {
-        dispatch({
-            type: 'TWITCHDATA',
-            payload: data.data
-        })
-    })*/
-
-        /*  while (counter !== 0) {
-              const request = new Request('https://api.twitch.tv/helix/streams?game_id=32982&first=100&language=fr' + (cursor ? '&after=' + cursor : ''), { 
-                method: 'GET' ,
-                headers: {
-                  'Client-ID': 'bgbezb2vov7jc4twxauhw3yh30ubbx',
-                  'Authorization': `Bearer ${oAuthKey}`
-                  }
-                });
-
-                console.log(request)
-          
-                return fetch(request)
-                        .then((response) => response.json())
-                        .then((responseJson) => { 
-                            if (counter === 1) {
-                                console.log(counter); 
-                                return data;
-                            }
-                            data.push(...responseJson.data);
-                            console.log('pas le if')
-                            console.log(data)
-
-                        return getStreamData(oAuthKey, --counter, responseJson.pagination.cursor, data);
-              });
-            }*/
-          
-    
-
-
-    
-}
 
 export const getAllStreams = (oAuthKey, cursor, data = [], counter = 15) => dispatch => {
     
