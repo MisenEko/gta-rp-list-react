@@ -1,20 +1,16 @@
-import React, {useState} from 'react'
+import React, {useSelector ,useState} from 'react'
 import './twitchfilter.css'
-//import { getAllStreams } from '../redux/reducers/TwitchData'
+import { getAllStreams } from '../redux/reducers/TwitchData'
 import {useDispatch } from 'react-redux'
 
 
 export default function TwitchFilter(props) {
 
-    const dispatch = useDispatch()
-
-    /*const {oAuthKey,refresh} = useSelector(state => ({
-        ...state.TwitchKey       
-    })) */
-    
+    const dispatch = useDispatch()    
 
     const noFilter = () => {
-        //dispatch(getAllStreams(oAuthKey.access_token))
+        dispatch({type: 'TWITCHDATA', payload: []})
+        dispatch(getAllStreams(props.twitchKey))
         dispatch({
             type: 'FILTEREDDATA',
             payload: ['del']

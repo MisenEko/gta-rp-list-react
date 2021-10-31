@@ -38,7 +38,7 @@ export default TwitchData;
 
 
 export const getAllStreams = (oAuthKey, cursor, data = [], counter = 15) => dispatch => {
-    
+
     while (counter !== 0) {
 
         const request = new Request('https://api.twitch.tv/helix/streams?game_id=32982&first=100&language=fr' + (cursor ? '&after=' + cursor : ''), { 
@@ -53,7 +53,8 @@ export const getAllStreams = (oAuthKey, cursor, data = [], counter = 15) => disp
         return fetch(request)
         .then((response) => response.json())
         .then((responseJson) => { 
-                if (!responseJson.pagination.cursor){
+            
+               if (!responseJson.pagination.cursor){
                     counter = 0; 
                     dispatch({
                         type: 'TWITCHDATA',
@@ -63,6 +64,6 @@ export const getAllStreams = (oAuthKey, cursor, data = [], counter = 15) => disp
                         data.push(...responseJson.data);
                         dispatch(getAllStreams(oAuthKey, responseJson.pagination.cursor, data, --counter));
                     }
-            });
+                })
     }
   }

@@ -24,13 +24,6 @@ export default function TwitchMain() {
         dispatch(getOauthKey())      
     }, [])
 
-    /*useEffect(() => {
-        if(refresh){
-            dispatch(getStreamData(oAuthKey.access_token))
-        }
-        
-    }, [oAuthKey.access_token])*/
-
     useEffect(() => {
 
         if(refresh){
@@ -39,75 +32,49 @@ export default function TwitchMain() {
         
     }, [oAuthKey.access_token]) 
 
-    const checkFilter = () => {
-        
-    }
 
-    const test = () =>{
-        
-    }
+    /** setinterval test, it's not what I expect */
+    /*useEffect(() => {
+        if(refresh){
+            const interval = setInterval(() => {            
+                    dispatch(getAllStreams(oAuthKey.access_token))            
+                }, 10000)
+            }      
+              
+    }, [oAuthKey.access_token]) */
 
+    console.log(streamData)
     return (
         <>            
-                
-                    <TwitchFilter
-                        gtaData={streamData}
-                        twitchKey = {oAuthKey.access_token}
-                    />
-                
+            {/** filter button */}
+            <TwitchFilter
+                gtaData={streamData}
+                twitchKey = {oAuthKey.access_token}
+            /> 
 
-                {/*<div className="thumbnail-content">
-                    {streamData && streamData.map( item => {
-                    return (
-                        <TwitchThumbNail key ={uuidv4()}>                            
-                            <img  src={`https://static-cdn.jtvnw.net/previews-ttv/live_user_${item.user_login}-440x248.jpg`} />
-                            <div>{item.title}</div>
-                        </TwitchThumbNail>
-                    )
-                    })}
-                </div>*/}
-
-                
-                { /*       <div className="thumbnail">
-                    {filteredData.length > 0 ? filteredData.map( item => {
-                        
-                        return ( <TwitchThumbNail key ={uuidv4()}>                            
-                                    <img  src={`https://static-cdn.jtvnw.net/previews-ttv/live_user_${item.user_login}-440x248.jpg`} />
-                                    <div>{item.title}</div>
-                                 </TwitchThumbNail>
-                    )}) 
-
-                                             : streamData.map( item => {
-
-                        return (
-                                <TwitchThumbNail key ={uuidv4()}>                            
-                                    <img  src={`https://static-cdn.jtvnw.net/previews-ttv/live_user_${item.user_login}-440x248.jpg`} />
-                                    <div>{item.title}</div>
-                                </TwitchThumbNail>
-                                )})
-                        } 
-                    </div>*/}
-
-                <div className="thumbnail">
-
+            {/** thumbnails body */}
+            <div className="thumbnail">
                 {filteredData.length > 0 ? filteredData.map( item => {
                         
-                        return ( <TwitchThumbNail key ={uuidv4()}>                            
+                    return ( <TwitchThumbNail key ={uuidv4()}>                            
                                     <a href={`https://www.twitch.tv/${item.user_login}`} target='_blank' ><img alt={item.title} src={`https://static-cdn.jtvnw.net/previews-ttv/live_user_${item.user_login}-440x248.jpg`} /></a>
-                                    <div>{item.title}</div>
-                                    {console.log(item)}
-                                 </TwitchThumbNail>
-                    )}) 
+                                    <h2>{item.title}</h2>
+                                    <p>{item.user_name}</p>
+                             </TwitchThumbNail>
+                            )
+                }) 
 
-                                            : checkData===false ? <h1>Pas de serveur en ligne pour l'instant</h1> : streamData.map( item => {
+                : checkData===false 
+                ? <h1>Pas de serveur en ligne pour l'instant</h1> 
+                : streamData.map( item => {
 
-                        return (
-                                <TwitchThumbNail key ={uuidv4()}>                            
+                    return (  <TwitchThumbNail key ={uuidv4()}>                            
                                     <a href={`https://www.twitch.tv/${item.user_login}`} target='_blank' ><img alt={item.title} src={`https://static-cdn.jtvnw.net/previews-ttv/live_user_${item.user_login}-440x248.jpg`} /></a>
                                     <div>{item.title}</div>
                                 </TwitchThumbNail>
-                                )})
-                        } 
+                            )
+                    })
+                } 
                     {/* (()=> {
                         if(filteredData.length > 0){
                             
