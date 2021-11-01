@@ -28,8 +28,9 @@ export const getOauthKey = () => dispatch => {
     .then(data => {
         dispatch({
             type: 'LOADING',
-            payload: data,
+            payload: data
         })
+        
     })
 
     

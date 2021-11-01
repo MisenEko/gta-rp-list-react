@@ -43,7 +43,35 @@ export default function TwitchMain() {
               
     }, [oAuthKey.access_token]) */
 
-    console.log(streamData)
+   /* const thunkA = () => async (dispatch, getState) => {
+        const test = await dispatch(getOauthKey())
+        console.log(test)
+ 
+    }
+
+    const thunkB = (key) =>(dispatch, getState) => {
+        dispatch(getAllStreams(key))
+        console.log('ici2')
+       
+    }
+
+    const chainMyActions = () => {
+        console.log('ici3') 
+        const response = dispatch(thunkA());
+          
+        /*  response.then((data) => {
+            dispatch(thunkB(data.access_token))
+          })
+        }
+      
+
+
+
+    useEffect(() => {
+        chainMyActions()
+    }, [])*/
+
+
     return (
         <>            
             {/** filter button */}
