@@ -43,6 +43,14 @@ export default function TwitchFilter(props) {
             <div className="button" id="button-4" onClick={() => {streamFilter((/unserveur\s?v/g))}}>
                 <div id="underline"></div>
                 serveur
+            </div> 
+            <div className="button" id="button-4" onClick={() => {streamFilter((/altica+/g))}}>
+                <div id="underline"></div>
+                Altica 
+            </div>
+            <div className="button" id="button-4" onClick={() => {streamFilter((/manzibar+/g))}}>
+                <div id="underline"></div>
+                Manzibar
             </div>
 
         </div>

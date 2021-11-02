@@ -5,6 +5,8 @@ import TwitchFilter from './TwitchFilter'
 import { useSelector, useDispatch } from 'react-redux'
 import {getOauthKey} from '../redux/reducers/TwitchKey'
 import {getAllStreams} from '../redux/reducers/TwitchData'
+import {getAllStreamRefresh} from '../redux/reducers/TwitchDataRefresh'
+import {test} from '../redux/reducers/TwitchDataRefresh'
 import {v4 as uuidv4} from 'uuid'
 
 
@@ -20,6 +22,10 @@ export default function TwitchMain() {
         ...state.TwitchData
     }))
 
+    const {streamDataRefresh} = useSelector(state => ({
+        ...state.TwitchDataRefresh
+    }))
+
     useEffect(() => {
         dispatch(getOauthKey())      
     }, [])
@@ -27,51 +33,28 @@ export default function TwitchMain() {
     useEffect(() => {
 
         if(refresh){
-            dispatch(getAllStreams(oAuthKey.access_token))
+            dispatch(getAllStreams(oAuthKey.access_token)) 
+            dispatch(test(oAuthKey.access_token))       
+            
         }
         
     }, [oAuthKey.access_token]) 
 
+    console.log(streamDataRefresh)
+
 
     /** setinterval test, it's not what I expect */
-    /*useEffect(() => {
-        if(refresh){
-            const interval = setInterval(() => {            
-                    dispatch(getAllStreams(oAuthKey.access_token))            
-                }, 10000)
-            }      
-              
-    }, [oAuthKey.access_token]) */
-
-   /* const thunkA = () => async (dispatch, getState) => {
-        const test = await dispatch(getOauthKey())
-        console.log(test)
- 
-    }
-
-    const thunkB = (key) =>(dispatch, getState) => {
-        dispatch(getAllStreams(key))
-        console.log('ici2')
-       
-    }
-
-    const chainMyActions = () => {
-        console.log('ici3') 
-        const response = dispatch(thunkA());
-          
-        /*  response.then((data) => {
-            dispatch(thunkB(data.access_token))
-          })
-        }
-      
-
-
-
     useEffect(() => {
-        chainMyActions()
-    }, [])*/
+        
+            if(refresh){
 
+               // setInterval(()=> {dispatch(getAllStreamsRefresh(oAuthKey.access_token))}, 10000)
+            }
+                
+              
+    }, []) 
 
+ 
     return (
         <>            
             {/** filter button */}
@@ -98,7 +81,8 @@ export default function TwitchMain() {
 
                     return (  <TwitchThumbNail key ={uuidv4()}>                            
                                     <a href={`https://www.twitch.tv/${item.user_login}`} target='_blank' ><img alt={item.title} src={`https://static-cdn.jtvnw.net/previews-ttv/live_user_${item.user_login}-440x248.jpg`} /></a>
-                                    <div>{item.title}</div>
+                                    <h2>{item.title}</h2>
+                                    <p>{item.user_name}</p>
                                 </TwitchThumbNail>
                             )
                     })
