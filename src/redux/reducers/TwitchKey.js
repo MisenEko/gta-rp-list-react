@@ -25,8 +25,7 @@ export const getOauthKey = () => dispatch => {
         "method": "POST"
     })
     .then(response => response.json())
-    .then(data => {
-        console.log('call ?')
+    .then(data => {        
         dispatch({
             type: 'LOADING',
             payload: data

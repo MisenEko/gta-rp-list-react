@@ -34,25 +34,13 @@ export default function TwitchMain() {
 
         if(refresh){
             dispatch(getAllStreams(oAuthKey.access_token)) 
-            dispatch(test(oAuthKey.access_token))       
+           // dispatch(test(oAuthKey.access_token))       
             
         }
         
     }, [oAuthKey.access_token]) 
 
-    console.log(streamDataRefresh)
-
-
-    /** setinterval test, it's not what I expect */
-    useEffect(() => {
-        
-            if(refresh){
-
-               // setInterval(()=> {dispatch(getAllStreamsRefresh(oAuthKey.access_token))}, 10000)
-            }
-                
-              
-    }, []) 
+    
 
  
     return (
@@ -64,7 +52,8 @@ export default function TwitchMain() {
             /> 
 
             {/** thumbnails body */}
-            <div className="thumbnail">
+            {streamData.length>0 ? 
+                <div className='thumbnail'>
                 {filteredData.length > 0 ? filteredData.map( item => {
                         
                     return ( <TwitchThumbNail key ={uuidv4()}>                            
@@ -114,7 +103,9 @@ export default function TwitchMain() {
                                         )})
                         }
                     })()*/}
-                </div>
+            </div> : 
+            
+            <div className="animation-box"><div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>}
 
 
             

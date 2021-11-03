@@ -5,7 +5,7 @@ const INITIAL_STATE = {
 
 function TwitchData (state = INITIAL_STATE, action){
 
-    let isData = true
+    
 
     switch(action.type){
         case 'TWITCHDATA' : {
@@ -19,6 +19,7 @@ function TwitchData (state = INITIAL_STATE, action){
 
         case 'FILTEREDDATA' : {
             /** a little spaghetti code... */
+            let isData = true
             let newArr = action.payload;
             {newArr.length === 0 ? isData = false : isData = true}
             if(newArr[0]==='del'){isData = true; newArr=[];}else{isData=false}
