@@ -1,5 +1,26 @@
 const INITIAL_STATE = {
-    streamDataRefresh : []
+    streamDataRefresh : [],
+    serveurList : [
+        {   nom : 'Altica',
+            regex : (/altica+/g)
+        },
+
+        {   nom : "21 Jump Click",
+            regex : (/21\s?jump\s?click/g)
+        },
+
+        {   nom : "Faily V",
+            regex : (/faily\s?v/g)
+        },
+
+        {   nom : "Manzibar",
+            regex : (/manzibar+/g)
+        },
+
+        {   nom : "test sans serveur",
+            regex : (/unserveur\s?v/g)
+        }
+    ]
 }
 
 function TwitchDataRefresh (state = INITIAL_STATE, action){
@@ -10,7 +31,6 @@ function TwitchDataRefresh (state = INITIAL_STATE, action){
             return {
                 ...state,
                 streamDataRefresh: action.payload
-
             }
         }
 
@@ -23,10 +43,9 @@ export default TwitchDataRefresh;
 
 
 
-export const test = (twitchKey) => dispatch => {    
-   setInterval(()=> {dispatch(getAllStreamsRefresh(twitchKey))}, 10000)
+export const refreshInterval = (twitchKey) => dispatch => {    
+   setInterval(()=> {dispatch(getAllStreamsRefresh(twitchKey))}, 100000)
 }
-
 
 const getAllStreamsRefresh = (twitchKey, cursor, data = [], counter = 15) => dispatch => {
 
@@ -47,7 +66,6 @@ const getAllStreamsRefresh = (twitchKey, cursor, data = [], counter = 15) => dis
                 
                 if (!responseJson.pagination.cursor){
                     counter = 0; 
-                    console.log('ici')
                     dispatch({
                         type: 'REFRESHTWITCHDATA',
                         payload: data                                               

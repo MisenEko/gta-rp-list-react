@@ -1,36 +1,24 @@
 import React, {useSelector ,useState} from 'react'
 import './twitchfilter.css'
-import { getAllStreams } from '../redux/reducers/TwitchData'
-import {useDispatch } from 'react-redux'
+import {getAllStreams} from '../redux/reducers/TwitchData'
+import {useDispatch} from 'react-redux'
 import {v4 as uuidv4} from 'uuid'
 
 
 export default function TwitchFilter(props) {
 
-    const serveurList = [
-        {   nom : 'Altica',
-            regex : (/altica+/g)
-        },
-
-        {   nom : "21 Jump Click",
-            regex : (/21\s?jump\s?click/g)
-        },
-
-        {   nom : "Faily V",
-            regex : (/faily\s?v/g)
-        },
-        {   nom : "Manzibar",
-            regex : (/manzibar+/g)
-        },
-        {   nom : "test sans serveur",
-            regex : (/unserveur\s?v/g)
-        }
-    ]
+    const serveurList = props.streamList
+    
+    //const gtaData = props.gtaData.filter(data => data.title.toLowerCase().match((/altica+/g)))
+    console.log(serveurList[0].nom)
+    //console.log(gtaData)
 
     const dispatch = useDispatch()    
 
     const noFilter = () => {
-        dispatch({type: 'TWITCHDATA', payload: []})
+        dispatch({
+            type: 'TWITCHDATA',
+            payload: []})
         dispatch(getAllStreams(props.twitchKey))
         dispatch({
             type: 'FILTEREDDATA',
@@ -39,12 +27,17 @@ export default function TwitchFilter(props) {
     }
 
     const streamFilter = (nameRegex) => {
-        console.log(serveurList[0].regex)
         const filteredData = props.gtaData.filter(data => data.title.toLowerCase().match(nameRegex))
         dispatch({
             type: 'FILTEREDDATA',
             payload: filteredData
         })
+    }
+
+  
+
+    const countFilter = (gtaData) => {
+
     }
 
     return (

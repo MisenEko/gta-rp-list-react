@@ -5,8 +5,7 @@ import TwitchFilter from './TwitchFilter'
 import { useSelector, useDispatch } from 'react-redux'
 import {getOauthKey} from '../redux/reducers/TwitchKey'
 import {getAllStreams} from '../redux/reducers/TwitchData'
-import {getAllStreamRefresh} from '../redux/reducers/TwitchDataRefresh'
-import {test} from '../redux/reducers/TwitchDataRefresh'
+import {refreshInterval} from '../redux/reducers/TwitchDataRefresh'
 import {v4 as uuidv4} from 'uuid'
 
 
@@ -22,7 +21,7 @@ export default function TwitchMain() {
         ...state.TwitchData
     }))
 
-    const {streamDataRefresh} = useSelector(state => ({
+    const {streamDataRefresh, serveurList} = useSelector(state => ({
         ...state.TwitchDataRefresh
     }))
 
@@ -34,13 +33,11 @@ export default function TwitchMain() {
 
         if(refresh){
             dispatch(getAllStreams(oAuthKey.access_token)) 
-           // dispatch(test(oAuthKey.access_token))       
+            dispatch(refreshInterval(oAuthKey.access_token))       
             
         }
         
-    }, [oAuthKey.access_token]) 
-
-    
+    }, [oAuthKey.access_token])    
 
  
     return (
@@ -49,6 +46,7 @@ export default function TwitchMain() {
             <TwitchFilter
                 gtaData={streamData}
                 twitchKey = {oAuthKey.access_token}
+                streamList = {serveurList}
             /> 
 
             {/** thumbnails body */}

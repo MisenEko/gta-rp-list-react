@@ -13,7 +13,7 @@ function TwitchData (state = INITIAL_STATE, action){
             return {
                 ...state,
                 streamData: action.payload,
-
+                
             }
         }
 
