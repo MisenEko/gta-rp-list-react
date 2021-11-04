@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useEffect} from 'react'
 import './twitchmain.css'
 import TwitchThumbNail from './TwitchThumbNail'
 import TwitchFilter from './TwitchFilter'
@@ -17,7 +17,7 @@ export default function TwitchMain() {
         ...state.TwitchKey       
     }))
 
-    const {streamData, filteredData, checkData} = useSelector(state => ({
+    const {streamData, filteredData, checkData, refreshData} = useSelector(state => ({
         ...state.TwitchData
     }))
 
@@ -29,25 +29,34 @@ export default function TwitchMain() {
         dispatch(getOauthKey())      
     }, [])
 
-    useEffect(() => {
+    let sentServeurList = [...serveurList]
+    console.log(serveurList)
+    console.log(sentServeurList)
+   
 
+    useEffect(() => {
+        
         if(refresh){
+            
             dispatch(getAllStreams(oAuthKey.access_token)) 
-            dispatch(refreshInterval(oAuthKey.access_token))       
+            //dispatch(refreshInterval(oAuthKey.access_token))       
             
         }
         
-    }, [oAuthKey.access_token])    
+    }, [oAuthKey.access_token])   
+  
 
- 
+
     return (
         <>            
             {/** filter button */}
-            <TwitchFilter
+           
+            {streamData.length>0 ? <TwitchFilter
                 gtaData={streamData}
                 twitchKey = {oAuthKey.access_token}
-                streamList = {serveurList}
-            /> 
+                streamList = {sentServeurList}
+                /> : <div></div>}
+
 
             {/** thumbnails body */}
             {streamData.length>0 ? 
@@ -74,36 +83,10 @@ export default function TwitchMain() {
                             )
                     })
                 } 
-                    {/* (()=> {
-                        if(filteredData.length > 0){
-                            
-                            filteredData.map( item => {
-                        
-                                return ( <TwitchThumbNail key ={uuidv4()}>                            
-                                            <img  src={`https://static-cdn.jtvnw.net/previews-ttv/live_user_${item.user_login}-440x248.jpg`} />
-                                            <div>{item.title}</div>
-                                         </TwitchThumbNail>
-                                        )})
 
-                        } else if (checkData ===  false){
-                           <TwitchThumbNail>
-                               
-                               <h1>Il n'y aucun stream en ligne pour ce serveur</h1>
-                           </TwitchThumbNail>
-                        } else {
-                            streamData.map( item => {
-                             
-                                return (
-                                        <TwitchThumbNail key ={uuidv4()}>                            
-                                            <img  src={`https://static-cdn.jtvnw.net/previews-ttv/live_user_${item.user_login}-440x248.jpg`} />
-                                            <div>{item.title}</div>
-                                        </TwitchThumbNail>
-                                        )})
-                        }
-                    })()*/}
             </div> : 
             
-            <div className="animation-box"><div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>}
+            <div className="animation-box"><div className="lds-roller">Chargement en cours<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>}
 
 
             

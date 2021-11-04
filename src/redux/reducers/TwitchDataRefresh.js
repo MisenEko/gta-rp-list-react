@@ -2,23 +2,28 @@ const INITIAL_STATE = {
     streamDataRefresh : [],
     serveurList : [
         {   nom : 'Altica',
-            regex : (/altica+/g)
+            regex : (/altica+/g),
+            data: []
         },
 
         {   nom : "21 Jump Click",
-            regex : (/21\s?jump\s?click/g)
+            regex : (/21\s?jump\s?click/g),
+            data: []
         },
 
         {   nom : "Faily V",
-            regex : (/faily\s?v/g)
+            regex : (/faily\s?v/g),
+            data: []
         },
 
         {   nom : "Manzibar",
-            regex : (/manzibar+/g)
+            regex : (/manzibar+/g),
+            data: []
         },
 
         {   nom : "test sans serveur",
-            regex : (/unserveur\s?v/g)
+            regex : (/unserveur\s?v/g),
+            data: []
         }
     ]
 }

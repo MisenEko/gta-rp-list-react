@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
     streamData : [],
-    filteredData : []
+    filteredData : [],
+    refreshData : false
 }
 
 function TwitchData (state = INITIAL_STATE, action){
@@ -13,6 +14,7 @@ function TwitchData (state = INITIAL_STATE, action){
             return {
                 ...state,
                 streamData: action.payload,
+                refreshData : true
                 
             }
         }
