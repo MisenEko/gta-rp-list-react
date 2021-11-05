@@ -1,38 +1,11 @@
 const INITIAL_STATE = {
-    streamDataRefresh : [],
-    serveurList : [
-        {   nom : 'Altica',
-            regex : (/altica+/g),
-            data: []
-        },
-
-        {   nom : "21 Jump Click",
-            regex : (/21\s?jump\s?click/g),
-            data: []
-        },
-
-        {   nom : "Faily V",
-            regex : (/faily\s?v/g),
-            data: []
-        },
-
-        {   nom : "Manzibar",
-            regex : (/manzibar+/g),
-            data: []
-        },
-
-        {   nom : "test sans serveur",
-            regex : (/unserveur\s?v/g),
-            data: []
-        }
-    ]
+    streamDataRefresh : []
 }
 
 function TwitchDataRefresh (state = INITIAL_STATE, action){
 
     switch(action.type){
         case 'REFRESHTWITCHDATA' : {
-
             return {
                 ...state,
                 streamDataRefresh: action.payload
@@ -48,14 +21,15 @@ export default TwitchDataRefresh;
 
 
 
-export const refreshInterval = (twitchKey) => dispatch => {    
-   setInterval(()=> {dispatch(getAllStreamsRefresh(twitchKey))}, 100000)
+export const refreshInterval = (twitchKey) => dispatch => {  
+    getAllStreamsRefresh(twitchKey)
+    setInterval(()=> {dispatch(getAllStreamsRefresh(twitchKey))}, 100000)
 }
 
 const getAllStreamsRefresh = (twitchKey, cursor, data = [], counter = 15) => dispatch => {
-
+        console.log('test')
         while (counter !== 0) {
-            
+
             const request = new Request('https://api.twitch.tv/helix/streams?game_id=32982&first=100&language=fr' + (cursor ? '&after=' + cursor : ''), { 
                 method: 'GET' ,
                 headers: {
@@ -80,7 +54,5 @@ const getAllStreamsRefresh = (twitchKey, cursor, data = [], counter = 15) => dis
                     dispatch(getAllStreamsRefresh(twitchKey, responseJson.pagination.cursor, data, --counter));
                 }
             })
-        }
-        
-   
+        }  
   }

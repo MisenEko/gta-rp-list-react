@@ -5,6 +5,11 @@
     justify-content: flex-start;
 }
 
+  .thumbnail .user-content{
+    display: flex;
+    justify-content: space-between;
+  }
+
 /** Loading animation */
 
 .animation-box{

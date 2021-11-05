@@ -1,15 +1,15 @@
 const INITIAL_STATE = {
     streamData : [],
-    filteredData : [],
-    refreshData : false
+    filteredData : []
+
 }
 
-function TwitchData (state = INITIAL_STATE, action){
 
-    
+
+function TwitchData (state = INITIAL_STATE, action){ 
 
     switch(action.type){
-        case 'TWITCHDATA' : {
+        case 'TWITCHDATA' : {          
 
             return {
                 ...state,
