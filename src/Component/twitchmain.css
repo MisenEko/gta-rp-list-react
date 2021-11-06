@@ -1,14 +1,4 @@
-.thumbnail{
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 1460px;
-    justify-content: flex-start;
-}
 
-  .thumbnail .user-content{
-    display: flex;
-    justify-content: space-between;
-  }
 
 /** Loading animation */
 

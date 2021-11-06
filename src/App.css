@@ -4,3 +4,16 @@
   display: flex;  
 }
 
+/*media query*/
+
+@media screen and (max-width: 675px){
+  
+  .App{
+    display: flex;
+    flex-direction: column;
+  }
+
+
+
+}
+

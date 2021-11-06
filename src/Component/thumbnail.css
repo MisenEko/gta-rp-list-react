@@ -1,3 +1,10 @@
+.thumbnail{
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1460px;
+  justify-content: flex-start;
+  margin: auto;
+} 
 
 .thumbnail-content{
     max-width: 440px;
@@ -19,7 +26,19 @@
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
+.thumbnail-content img {
+  width: 100%;
+  height: auto;
+}
 
+
+.thumbnail .user-content{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+  /* animation*/
 .fade-in-image {
     animation: fadeIn 2s;
     -webkit-animation: fadeIn 2s;
@@ -50,4 +69,22 @@
   @-ms-keyframes fadeIn {
     0% {opacity:0;}
     100% {opacity:1;}
+  }
+
+
+  @media screen and (max-width: 675px){
+
+    .thumbnail{
+      max-width: 360px;
+      margin: auto;
+    }
+  
+    .thumbnail-content{
+      
+      min-width: auto;
+      margin: auto;
+    }
+  
+  
+  
   }

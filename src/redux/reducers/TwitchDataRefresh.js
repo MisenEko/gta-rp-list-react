@@ -27,7 +27,6 @@ export const refreshInterval = (twitchKey) => dispatch => {
 }
 
 const getAllStreamsRefresh = (twitchKey, cursor, data = [], counter = 15) => dispatch => {
-        console.log('test')
         while (counter !== 0) {
 
             const request = new Request('https://api.twitch.tv/helix/streams?game_id=32982&first=100&language=fr' + (cursor ? '&after=' + cursor : ''), { 
@@ -46,7 +45,7 @@ const getAllStreamsRefresh = (twitchKey, cursor, data = [], counter = 15) => dis
                 if (!responseJson.pagination.cursor){
                     counter = 0; 
                     dispatch({
-                        type: 'REFRESHTWITCHDATA',
+                        type: 'TWITCHDATA',
                         payload: data                                               
                     })
                 } else {                        

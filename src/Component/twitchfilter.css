@@ -46,4 +46,20 @@
   #button-4:hover #underline {
     left: 0;
   }
+
+  @media screen and (max-width: 675px){
+
+  .filter-content{
+    display: flex;
+    max-width: 100%;
+  }
+
+  .filter-content .button{
+    width: 100%;
+    margin: 0;
+  }
+  
+  
+  
+  }
   

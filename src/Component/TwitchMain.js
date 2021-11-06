@@ -6,10 +6,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import {getOauthKey} from '../redux/reducers/TwitchKey'
 import {getAllStreams} from '../redux/reducers/TwitchData'
 import {refreshInterval} from '../redux/reducers/TwitchDataRefresh'
+import useDimension from '../Hooks/useDimension'
 import {v4 as uuidv4} from 'uuid'
 
 
 export default function TwitchMain() {
+
+    const browserWidth = useDimension();
 
     const dispatch = useDispatch()
 
@@ -38,7 +41,15 @@ export default function TwitchMain() {
         
     }, [oAuthKey.access_token])   
   
-
+    const urlThumbnail = (user_login) => {
+        let url = ''
+        if(browserWidth < 680 || window.innerWidth < 680){
+            url = `https://static-cdn.jtvnw.net/previews-ttv/live_user_${user_login}-367x207.jpg`
+        }else{
+            url = `https://static-cdn.jtvnw.net/previews-ttv/live_user_${user_login}-440x248.jpg`
+        }
+        return url
+    }
 
     return (
         <>            
@@ -56,7 +67,10 @@ export default function TwitchMain() {
                 {filteredData.length > 0 ? filteredData.map( item => {
                         
                     return ( <TwitchThumbNail key ={uuidv4()}>                            
-                                    <a href={`https://www.twitch.tv/${item.user_login}`} target='_blank' ><img alt={item.title} src={`https://static-cdn.jtvnw.net/previews-ttv/live_user_${item.user_login}-440x248.jpg`} /></a>
+                                    <a  href={`https://www.twitch.tv/${item.user_login}`} target='_blank' ><img alt={item.title} 
+                                        src={`https://static-cdn.jtvnw.net/previews-ttv/live_user_${item.user_login}-440x248.jpg`}/>
+                                    </a>
+                                        
                                     <h3>{item.title}</h3>
                                     <div className="user-content"><div>{item.user_name}</div><div>viewers : {item.viewer_count}</div></div>
                              </TwitchThumbNail>
@@ -68,8 +82,9 @@ export default function TwitchMain() {
                 : streamData.map( item => {
 
                     return (  <TwitchThumbNail key ={uuidv4()}>                            
-                                    <a href={`https://www.twitch.tv/${item.user_login}`} target='_blank' ><img alt={item.title} src={`https://static-cdn.jtvnw.net/previews-ttv/live_user_${item.user_login}-440x248.jpg`} /></a>
-                                    <h3>{item.title}</h3>
+                                    <a  href={`https://www.twitch.tv/${item.user_login}`} target='_blank' ><img alt={item.title} 
+                                        src={`https://static-cdn.jtvnw.net/previews-ttv/live_user_${item.user_login}-440x248.jpg`}/>
+                                    </a>                                    <h3>{item.title}</h3>
                                     <div className="user-content"><div>{item.user_name}</div><div>viewers : {item.viewer_count}</div></div>
                                 </TwitchThumbNail>
                             )

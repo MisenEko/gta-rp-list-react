@@ -1,4 +1,4 @@
-import React, {useEffect ,useState, useRef} from 'react'
+import React, {useEffect ,useState, useSelector} from 'react'
 import './twitchfilter.css'
 import {getAllStreams} from '../redux/reducers/TwitchData'
 import {useDispatch} from 'react-redux'
@@ -42,10 +42,12 @@ export default function TwitchFilter(props) {
         setServeurList(newServeurlist)            
     }
 
+
+
   
     useEffect(() => {
         serveurCount()
-    }, [])
+    }, [props.gtaData])
 
     
     /**  button to reset and refresh all streams*/
