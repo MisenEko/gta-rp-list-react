@@ -1,3 +1,12 @@
+ul {
+  padding: 0;
+}
+
+.filter-content .menu-button{
+  width: 300px;
+  display: none;
+}
+
 .filter-content{
     max-width: 300px;
 }
@@ -7,9 +16,9 @@
         display: inline-flex;
         height: 40px;
         width: 150px;
-        border: 2px solid #BFC0C0;
+        border: 1px solid #1a2639;
         margin: 20px 20px 20px 20px;
-        color: #BFC0C0;
+        color: #1a2639;
         text-transform: uppercase;
         text-decoration: none;
         font-size: .8em;
@@ -17,6 +26,7 @@
         align-items: center;
         justify-content: center;
         overflow: hidden;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
       
 }
 
@@ -37,7 +47,7 @@
     margin-top: 15px;
     align-self: flex-end;
     left: -200px;
-    background: #BFC0C0;
+    background: #1a2639;
     position: absolute;
     transition: all .3s ease-Out;
     bottom: 0;
@@ -51,12 +61,19 @@
 
   .filter-content{
     display: flex;
+    flex-direction: column;
     max-width: 100%;
   }
 
   .filter-content .button{
     width: 100%;
+    
     margin: 0;
+  }
+
+  .filter-content .menu-button {
+    width: 100%;
+    display: block;
   }
   
   

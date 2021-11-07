@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react'
 import './twitchmain.css'
+import Banner from './Banner' 
 import TwitchThumbNail from './TwitchThumbNail'
 import TwitchFilter from './TwitchFilter'
 import { useSelector, useDispatch } from 'react-redux'
@@ -78,7 +79,7 @@ export default function TwitchMain() {
                 }) 
 
                 : checkData===false 
-                ? <h1>Pas de serveur en ligne pour l'instant</h1> 
+                ? <div className="noserver-text"><div className="shadows"><span>Aucun</span><span>Stream</span><span>en</span><span>ligne</span><span></span></div></div>
                 : streamData.map( item => {
 
                     return (  <TwitchThumbNail key ={uuidv4()}>                            

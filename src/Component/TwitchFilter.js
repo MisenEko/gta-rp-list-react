@@ -7,6 +7,9 @@ import {v4 as uuidv4} from 'uuid'
 
 export default function TwitchFilter(props) {
 
+    const [toggleMenu, setToggleMenu] = useState(false)
+    const [largeur, setLargeur] = useState(window.innerWidth)
+
     const [serveurList, setServeurList] = useState([
         {   nom : 'Altica',
             regex : (/altica+/g),
@@ -41,13 +44,21 @@ export default function TwitchFilter(props) {
         newServeurlist.map(item => item.data = props.gtaData.filter(data => data.title.toLowerCase().match(item.regex)))
         setServeurList(newServeurlist)            
     }
-
-
-
   
     useEffect(() => {
         serveurCount()
     }, [props.gtaData])
+
+    useEffect(()=> {
+        const changeWidth = () => {
+            setLargeur(window.innerWidth)
+        }
+        window.addEventListener('resize', changeWidth)
+
+        return () => {
+            window.removeEventListener('resize', changeWidth)
+        }
+    },[])
 
     
     /**  button to reset and refresh all streams*/
@@ -75,26 +86,41 @@ export default function TwitchFilter(props) {
         })
     }
 
+    const toogleNav = () => {
+        setToggleMenu(!toggleMenu)
+    }
+
   
     return (
         
-        <div className="filter-content">
+        <nav  className="filter-content">
+
+            <div className="menu-button">
+                <div className="button" id="button-4" onClick={toogleNav}>
+                        <div id="underline"></div>
+                        Menu
+                </div>
+            </div>
+
+            {(toggleMenu || largeur > 680) && (
+            <ul>            
+                <li className="button" id="button-4" onClick={noFilter}>
+                    <div id="underline"></div>
+                    Reset Filter
+                </li>   
+
+                {serveurList.map((item) => {
+                    return(  <li className="button" id="button-4" key={uuidv4()}  onClick={() => {streamFilter(item.regex)}}>
+                                <div id="underline" key={uuidv4()}></div>
+                                <div className="button-content">
+                                    <div>{item.nom}</div>
+                                    <div style={{color: 'red'}}>{item.data.length} lives</div>
+                                </div>
+                            </li>)
+                    })}
+            </ul>
+            )}
             
-            <div className="button" id="button-4" onClick={noFilter}>
-                <div id="underline"></div>
-                Reset Filter
-            </div>   
-
-            {serveurList.map((item) => {
-               return(  <div className="button" id="button-4" key={uuidv4()}  onClick={() => {streamFilter(item.regex)}}>
-                            <div id="underline" key={uuidv4()}></div>
-                            <div className="button-content">
-                                <div>{item.nom}</div>
-                                <div style={{color: 'lightsalmon'}}>{item.data.length} lives</div>
-                            </div>
-                        </div>)
-                })}
-
-        </div>
+        </nav>
     )
 }
