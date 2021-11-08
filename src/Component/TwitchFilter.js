@@ -3,6 +3,7 @@ import './twitchfilter.css'
 import {getAllStreams} from '../redux/reducers/TwitchData'
 import {useDispatch} from 'react-redux'
 import {v4 as uuidv4} from 'uuid'
+import menu from '../Img/icons/icons8-menu.svg'
 
 
 export default function TwitchFilter(props) {
@@ -95,23 +96,22 @@ export default function TwitchFilter(props) {
         
         <nav  className="filter-content">
 
-            <div className="menu-button">
-                <div className="button" id="button-4" onClick={toogleNav}>
-                        <div id="underline"></div>
-                        Menu
-                </div>
+            <div className="menu-button" onClick={toogleNav}>
+                    
+                        <img src={menu} alt=''/>
+
             </div>
 
             {(toggleMenu || largeur > 680) && (
             <ul>            
                 <li className="button" id="button-4" onClick={noFilter}>
-                    <div id="underline"></div>
+                    <div id={largeur < 680 ? " " : "underline"}></div>
                     Reset Filter
                 </li>   
 
                 {serveurList.map((item) => {
-                    return(  <li className="button" id="button-4" key={uuidv4()}  onClick={() => {streamFilter(item.regex)}}>
-                                <div id="underline" key={uuidv4()}></div>
+                    return(  <li className="button" id="button-4" key={uuidv4()}  onClick={() => {streamFilter(item.regex); toogleNav()}}>
+                                <div id={largeur < 680 ? " " : "underline"}></div>
                                 <div className="button-content">
                                     <div>{item.nom}</div>
                                     <div style={{color: 'red'}}>{item.data.length} lives</div>

@@ -7,6 +7,11 @@ ul {
   display: none;
 }
 
+.filter-content .menu-button img{
+  width: 30px;
+  
+}
+
 .filter-content{
     max-width: 300px;
 }
@@ -63,6 +68,9 @@ ul {
     display: flex;
     flex-direction: column;
     max-width: 100%;
+    position: absolute;
+    z-index: 2;
+    background: white;
   }
 
   .filter-content .button{
@@ -73,7 +81,10 @@ ul {
 
   .filter-content .menu-button {
     width: 100%;
-    display: block;
+    height: 60px;
+    display: flex;
+    margin-left: 20px;
+
   }
   
   

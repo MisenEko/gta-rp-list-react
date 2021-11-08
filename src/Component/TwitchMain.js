@@ -53,7 +53,10 @@ export default function TwitchMain() {
     }
 
     return (
-        <>            
+        <>   
+        <Banner />        
+        <div className="container">
+
             {/** filter button */}
            
             {streamData.length>0 ? <TwitchFilter
@@ -66,35 +69,41 @@ export default function TwitchMain() {
             {streamData.length>0 ? 
                 <div className='thumbnail'>
                 {filteredData.length > 0 ? filteredData.map( item => {
-                        
+                    
                     return ( <TwitchThumbNail key ={uuidv4()}>                            
                                     <a  href={`https://www.twitch.tv/${item.user_login}`} target='_blank' ><img alt={item.title} 
                                         src={`https://static-cdn.jtvnw.net/previews-ttv/live_user_${item.user_login}-440x248.jpg`}/>
                                     </a>
                                         
-                                    <h3>{item.title}</h3>
-                                    <div className="user-content"><div>{item.user_name}</div><div>viewers : {item.viewer_count}</div></div>
+                                    
+                                    <div className="user-content"><h3>{item.title}</h3><div>{item.user_name}</div><div>viewers : {item.viewer_count}</div></div>
+
                              </TwitchThumbNail>
                             )
-                }) 
-
-                : checkData===false 
-                ? <div className="noserver-text"><div className="shadows"><span>Aucun</span><span>Stream</span><span>en</span><span>ligne</span><span></span></div></div>
-                : streamData.map( item => {
-
-                    return (  <TwitchThumbNail key ={uuidv4()}>                            
+                        }) 
+                        
+                        : checkData===false 
+                        ? <div className="noserver-text"><div className="shadows"><span>Aucun</span><span>Stream</span><span>en</span><span>ligne</span><span></span></div></div>
+                        : streamData.map( item => {
+                            
+                            return (  <TwitchThumbNail key ={uuidv4()}>                            
                                     <a  href={`https://www.twitch.tv/${item.user_login}`} target='_blank' ><img alt={item.title} 
                                         src={`https://static-cdn.jtvnw.net/previews-ttv/live_user_${item.user_login}-440x248.jpg`}/>
-                                    </a>                                    <h3>{item.title}</h3>
-                                    <div className="user-content"><div>{item.user_name}</div><div>viewers : {item.viewer_count}</div></div>
+                                    </a>                                    
+                                    <div className="user-content">
+                                        <h3>{item.title}</h3>
+                                        <div>{item.user_name}</div>
+                                        <div>viewers : {item.viewer_count}</div></div>
+                                    
                                 </TwitchThumbNail>
                             )
-                    })
-                } 
+                        })
+                    } 
 
             </div> : 
             
             <div className="animation-box"><div className="lds-roller">Chargement en cours<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>}
+        </div>
 
 
             

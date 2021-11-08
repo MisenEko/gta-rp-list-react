@@ -7,6 +7,7 @@
 } 
 
 .thumbnail-content{
+    position:relative;
     max-width: 440px;
     min-width: 440px;
     padding: 10px;
@@ -14,21 +15,20 @@
     cursor: pointer;
     min-height: 300px;
     text-align: left;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     border: solid 1px ;
     transition: 0.3s;
+    overflow: hidden;
 }
 
-.thumbnail-content:hover{
+/*.thumbnail-content:hover{
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
+}*/
 
 .thumbnail-content img {
   width: 100%;
   height: auto;
+  overflow:hidden;
 }
 
 
@@ -77,6 +77,8 @@
     .thumbnail{
       max-width: 360px;
       margin: auto;
+      z-index: 1;
+      margin-top: 60px;
     }
   
     .thumbnail-content{
@@ -88,3 +90,58 @@
   
   
   }
+
+
+  /**/
+
+   .thumbnail-content .card .layer {
+    z-index:1;
+    position:absolute;
+    top:calc(100% - 2px);
+    height:100%;
+    width:100%;
+    left:0;
+    background:#1a2639;
+    transition:0.5s;    
+  }
+
+ .thumbnail-content .card:hover .layer{
+  top:75%;
+}
+
+.thumbnail-content .card .card-content {
+  z-index:2; 
+  position:relative;
+}
+
+
+ .thumbnail-content .card .card-content .user-content {
+  font-size:14px;
+  line-height:24px;
+  color:red;
+  
+}
+
+ /*.thumbnail-content .image {
+  width:100px; height:100px;
+  margin:0 auto;
+  border-radius:50%;
+  overflow:hidden;
+  border: 4px solid white;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  
+}*/
+
+/* .thumbnail-content .content .details h2 {
+font-size:18px;
+color:white;
+}
+ .thumbnail-content .content .details h2 span {
+font-size:18px;
+color:purple;
+  transition:0.5s;
+}
+ .thumbnail-content:hover .content .details h2 span {
+  color:white;
+  position:relative
+}*/
