@@ -21,7 +21,7 @@ export default function TwitchMain() {
         ...state.TwitchKey       
     }))
 
-    const {streamData, filteredData, checkData} = useSelector(state => ({
+    const {streamData, filteredData, nameBanner, checkData} = useSelector(state => ({
         ...state.TwitchData
     }))
 
@@ -53,22 +53,30 @@ export default function TwitchMain() {
     }
 
     return (
-        <>   
-        <Banner />        
-        <div className="container">
+        <> 
 
-            {/** filter button */}
-           
-            {streamData.length>0 ? <TwitchFilter
-                gtaData={streamData}
-                twitchKey = {oAuthKey.access_token}             
+        {/**Banner name */}  
+        {/*nameBanner ?
+            <Banner
+            serverBanner= {nameBanner} />  :
+            <Banner
+            serverBanner= "GTA RP LIST" />
+        */}
+
+        <div className="container">
+            
+            {/** filter button */}           
+            {streamData.length>0 ? 
+                <TwitchFilter
+                    gtaData={streamData}
+                    twitchKey = {oAuthKey.access_token}             
                 /> : <div></div>}
 
 
             {/** thumbnails body */}
             {streamData.length>0 ? 
                 <div className='thumbnail'>
-                {filteredData.length > 0 ? filteredData.map( item => {
+                    {filteredData.length > 0 ? filteredData.map( item => {
                     
                     return ( <TwitchThumbNail key ={uuidv4()}>                            
                                     <a  href={`https://www.twitch.tv/${item.user_login}`} target='_blank' ><img alt={item.title} 
@@ -89,11 +97,14 @@ export default function TwitchMain() {
                             return (  <TwitchThumbNail key ={uuidv4()}>                            
                                     <a  href={`https://www.twitch.tv/${item.user_login}`} target='_blank' ><img alt={item.title} 
                                         src={`https://static-cdn.jtvnw.net/previews-ttv/live_user_${item.user_login}-440x248.jpg`}/>
-                                    </a>                                    
                                     <div className="user-content">
                                         <h3>{item.title}</h3>
+                                       <div className="user-details"> 
                                         <div>{item.user_name}</div>
-                                        <div>viewers : {item.viewer_count}</div></div>
+                                            <div>viewers : {item.viewer_count}</div>
+                                        </div>
+                                    </div>
+                                    </a>                                    
                                     
                                 </TwitchThumbNail>
                             )

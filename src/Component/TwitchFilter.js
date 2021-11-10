@@ -79,11 +79,13 @@ export default function TwitchFilter(props) {
     }
 
     /** create button with server list*/
-    const streamFilter = (nameRegex) => {        
+    const streamFilter = (nameRegex, name) => {        
         const filteredData = props.gtaData.filter(data => data.title.toLowerCase().match(nameRegex))
+        const serverName = name
         dispatch({
             type: 'FILTEREDDATA',
-            payload: filteredData
+            payload: filteredData, 
+            namePayload : serverName
         })
     }
 
@@ -110,7 +112,7 @@ export default function TwitchFilter(props) {
                 </li>   
 
                 {serveurList.map((item) => {
-                    return(  <li className="button" id="button-4" key={uuidv4()}  onClick={() => {streamFilter(item.regex); toogleNav()}}>
+                    return(  <li className="button" id="button-4" key={uuidv4()}  onClick={() => {streamFilter(item.regex, item.nom); toogleNav()}}>
                                 <div id={largeur < 680 ? " " : "underline"}></div>
                                 <div className="button-content">
                                     <div>{item.nom}</div>

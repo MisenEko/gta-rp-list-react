@@ -21,9 +21,9 @@
     overflow: hidden;
 }
 
-/*.thumbnail-content:hover{
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}*/
+.thumbnail a {
+  text-decoration: none;
+}
 
 .thumbnail-content img {
   width: 100%;
@@ -35,7 +35,53 @@
 .thumbnail .user-content{
     display: flex;
     justify-content: space-between;
+    color: hsl(217, 40%, 34%);
 }
+
+.thumbnail-content .user-content h3{
+  height: 48px;
+  
+}
+
+  /*layer animation*/
+
+  .thumbnail-content .card .layer {
+    z-index:1;
+    position:absolute;
+    top:calc(100% - 2px);
+    height:100%;
+    width:100%;
+    left:0;
+    background:hsl(217, 40%, 34%);
+    transition:0.5s;    
+  }
+
+  .thumbnail-content .card .card-content .user-content {
+    font-size:14px;
+    line-height:24px;
+    display: flex;
+    flex-direction: column;
+    transition: 0.5s;
+  }
+
+  .thumbnail-content .card .card-content {
+    z-index:2; 
+    position:relative;
+  
+  }
+
+ .thumbnail-content .card:hover .layer{
+  top:68%;
+}
+
+.thumbnail-content .card:hover .card-content .user-content {
+  color: white;
+}
+
+
+
+
+
 
 
   /* animation*/
@@ -72,76 +118,24 @@
   }
 
 
-  @media screen and (max-width: 675px){
 
-    .thumbnail{
-      max-width: 360px;
-      margin: auto;
-      z-index: 1;
-      margin-top: 60px;
-    }
-  
-    .thumbnail-content{
-      
-      min-width: auto;
-      margin: auto;
-    }
-  
-  
-  
+
+
+@media screen and (max-width: 675px){
+
+  .thumbnail{
+    max-width: 360px;
+    margin: auto;
+    z-index: 1;
+    margin-top: 60px;
+  }
+
+  .thumbnail-content{
+    
+    min-width: auto;
+    margin: auto;
   }
 
 
-  /**/
 
-   .thumbnail-content .card .layer {
-    z-index:1;
-    position:absolute;
-    top:calc(100% - 2px);
-    height:100%;
-    width:100%;
-    left:0;
-    background:#1a2639;
-    transition:0.5s;    
-  }
-
- .thumbnail-content .card:hover .layer{
-  top:75%;
 }
-
-.thumbnail-content .card .card-content {
-  z-index:2; 
-  position:relative;
-}
-
-
- .thumbnail-content .card .card-content .user-content {
-  font-size:14px;
-  line-height:24px;
-  color:red;
-  
-}
-
- /*.thumbnail-content .image {
-  width:100px; height:100px;
-  margin:0 auto;
-  border-radius:50%;
-  overflow:hidden;
-  border: 4px solid white;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-  
-}*/
-
-/* .thumbnail-content .content .details h2 {
-font-size:18px;
-color:white;
-}
- .thumbnail-content .content .details h2 span {
-font-size:18px;
-color:purple;
-  transition:0.5s;
-}
- .thumbnail-content:hover .content .details h2 span {
-  color:white;
-  position:relative
-}*/

@@ -23,7 +23,7 @@ export default TwitchDataRefresh;
 
 export const refreshInterval = (twitchKey) => dispatch => {  
     getAllStreamsRefresh(twitchKey)
-    setInterval(()=> {dispatch(getAllStreamsRefresh(twitchKey))}, 100000)
+    setInterval(()=> {dispatch(getAllStreamsRefresh(twitchKey))}, 600000)
 }
 
 const getAllStreamsRefresh = (twitchKey, cursor, data = [], counter = 15) => dispatch => {

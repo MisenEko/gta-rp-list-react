@@ -29,6 +29,7 @@ function TwitchData (state = INITIAL_STATE, action){
             return {
                 ...state,
                 filteredData: newArr,
+                nameBanner: action.namePayload,
                 checkData: isData
             }
         }
