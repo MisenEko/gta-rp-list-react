@@ -56,12 +56,12 @@ export default function TwitchMain() {
         <> 
 
         {/**Banner name */}  
-        {/*nameBanner ?
+        {nameBanner ?
             <Banner
             serverBanner= {nameBanner} />  :
             <Banner
             serverBanner= "GTA RP LIST" />
-        */}
+        }
 
         <div className="container">
             

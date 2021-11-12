@@ -16,6 +16,10 @@ ul {
     max-width: 300px;
 }
 
+.filter-content ul {
+  transition: 0.3s;
+}
+
 .filter-content .button{
 
         display: inline-flex;
@@ -70,13 +74,18 @@ ul {
     max-width: 100%;
     position: absolute;
     z-index: 2;
-    background: white;
+    background: white;    
   }
 
   .filter-content .button{
-    width: 100%;
-    
+    width: 99%;    
     margin: 0;
+    border: 0px;
+    border-bottom: 1px solid;
+  }
+
+  .filter-content li:nth-child(1){
+    border-top: 1px solid;
   }
 
   .filter-content .menu-button {
@@ -86,6 +95,8 @@ ul {
     margin-left: 20px;
 
   }
+
+
   
   
   
