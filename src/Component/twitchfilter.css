@@ -73,7 +73,7 @@ ul {
     flex-direction: column;
     max-width: 100%;
     position: absolute;
-    z-index: 2;
+    z-index: 3;
     background: white;    
   }
 

@@ -173,6 +173,10 @@ keeping this animation in case of
 
   @media screen and (max-width: 675px){
 
+    .container{
+      display: block;
+    }
+
       .noserver-text p {
         position: relative;
         top: 0;

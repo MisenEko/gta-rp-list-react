@@ -56,12 +56,7 @@ export default function TwitchMain() {
         <> 
 
         {/**Banner name */}  
-        {nameBanner ?
-            <Banner
-            serverBanner= {nameBanner} />  :
-            <Banner
-            serverBanner= "GTA RP LIST" />
-        }
+
 
         <div className="container">
             
@@ -70,25 +65,33 @@ export default function TwitchMain() {
                 <TwitchFilter
                     gtaData={streamData}
                     twitchKey = {oAuthKey.access_token}             
-                /> : <div></div>}
+                /> : <div></div>
+                }
 
 
             {/** thumbnails body */}
             {streamData.length>0 ? 
-                <div className='thumbnail'>
+                <div className="test">
+                    {nameBanner 
+                                ?
+                                <Banner serverBanner= {nameBanner} />  
+                                :
+                                <Banner serverBanner= "GTA RP LIST" />
+                    }
+                        <div className='thumbnail'>
+                            
                     {filteredData.length > 0 ? filteredData.map( item => {
                     
-                    return ( <TwitchThumbNail key ={uuidv4()}>                            
-                                    <a  href={`https://www.twitch.tv/${item.user_login}`} target='_blank' ><img alt={item.title} 
-                                        src={`https://static-cdn.jtvnw.net/previews-ttv/live_user_${item.user_login}-440x248.jpg`}/>
-                                    </a>
-                                        
-                                    
-                                    <div className="user-content"><h3>{item.title}</h3><div>{item.user_name}</div><div>viewers : {item.viewer_count}</div></div>
+                            return ( <TwitchThumbNail key ={uuidv4()}>
+                                                            
+                                            <a  href={`https://www.twitch.tv/${item.user_login}`} target='_blank' ><img alt={item.title} 
+                                                src={`https://static-cdn.jtvnw.net/previews-ttv/live_user_${item.user_login}-440x248.jpg`}/>
+                                            </a> 
+                                            <div className="user-content"><h3>{item.title}</h3><div>{item.user_name}</div><div>viewers : {item.viewer_count}</div></div>
 
-                             </TwitchThumbNail>
-                            )
-                        }) 
+                                    </TwitchThumbNail>
+                                    )
+                                }) 
                         
                         : checkData===false 
                         ? <div className="noserver-text"><div className="shadows"><span>Aucun</span><span>Stream</span><span>en</span><span>ligne</span><span></span></div></div>
@@ -111,7 +114,8 @@ export default function TwitchMain() {
                         })
                     } 
 
-            </div> : 
+                        </div>
+                </div> : 
             
             <div className="animation-box"><div className="lds-roller">Chargement en cours<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>}
         </div>
