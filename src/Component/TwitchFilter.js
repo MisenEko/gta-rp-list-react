@@ -116,7 +116,7 @@ export default function TwitchFilter(props) {
                                 <div id={largeur < 680 ? " " : "underline"}></div>
                                 <div className="button-content">
                                     <div>{item.nom}</div>
-                                    <div style={{color: 'red'}}>{item.data.length} {item.data.length === 0 ? 'live' : 'lives'}</div>
+                                    <div style={{color: 'red'}}>{item.data.length} {item.data.length <= 1 ? 'live' : 'lives'}</div>
                                 </div>
                             </li>)
                     })}
